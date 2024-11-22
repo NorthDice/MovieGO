@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MovieGO.Interfaces;
 
-namespace MovieGO.Models.User
+namespace MovieGO.Models.Users.User
 {
     public class PasswordHasher :IPasswordHasher
     {

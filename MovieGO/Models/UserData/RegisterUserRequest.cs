@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MovieGO.Models.User
+namespace MovieGO.Models.Users.User
 {
     public record RegisterUserRequest(
-       [Required] string Username,
+       [Required] string UserName,
        [Required] string Password,
        [Required] string Email);
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MovieGO.Models.User
+namespace MovieGO.Models.Users.User
 {
     public record LoginUserRequest(
         [Required] string Email,

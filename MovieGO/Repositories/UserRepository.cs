@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MovieGO.Data;
 using MovieGO.Entities;
 using MovieGO.Interfaces;
-using MovieGO.Models;
+using MovieGO.Models.Users;
 
 namespace MovieGO.Repositories
 {
