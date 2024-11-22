@@ -1,4 +1,5 @@
-﻿using MovieGO.Models.Users;
+﻿using MovieGO.Models.UserData;
+using MovieGO.Models.Users;
 
 namespace MovieGO.Interfaces
 {
