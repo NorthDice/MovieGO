@@ -15,13 +15,18 @@ namespace MovieGO.Models
             _userRepository = usersRepository;
         }
 
-        public async Task Register(int id,string userName,string email, string password)
+        public async Task Register(string userName,string email, string password)
         {
             var hashedPassword = _passwordHasher.Generate(password);
 
-            var user = User.Create(id, userName, password, email);
+            var user = User.Create(Guid.NewGuid(),userName, password, email);
 
             await _userRepository.Add(user);
+        }
+
+        public async Task<string> Login (string email,string password)
+        {
+            return "";
         }
 
     }

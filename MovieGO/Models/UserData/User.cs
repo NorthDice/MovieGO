@@ -1,8 +1,11 @@
-﻿namespace MovieGO.Models.UserData;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace MovieGO.Models.UserData;
 
 public class User
 {
-    private User(int id, string userName, string passwordHash, string email)
+    private User(Guid id, string userName, string passwordHash, string email)
     {
         Id = id;
         UserName = userName;
@@ -10,7 +13,9 @@ public class User
         Email = email;
     }
 
-    public int Id { get; set; }
+    [Key]
+    [Column(TypeName = "uuid")]
+    public Guid Id { get; set; }
 
     public string UserName { get; private set; }
 
@@ -18,7 +23,7 @@ public class User
 
     public string Email { get; private set; }
 
-    public static User Create(int id, string username, string passwordHash, string email)
+    public static User Create(Guid id, string username, string passwordHash, string email)
     {
         return new User(id, username, passwordHash, email);
     }
