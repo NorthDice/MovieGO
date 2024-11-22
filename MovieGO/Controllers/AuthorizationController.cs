@@ -15,5 +15,12 @@ namespace MovieGO.Controllers
             await _userService.Register(request.UserName, request.Email, request.Password);
             return View();
         }
+
+        public async Task<IResult> Login(LoginUserRequest request)
+        {
+            var token = await _userService.Login(request.Email, request.Password);
+
+
+        }
     }
 }

@@ -26,7 +26,17 @@ namespace MovieGO.Models
 
         public async Task<string> Login (string email,string password)
         {
-            return "";
+            var user = await _userRepository.GetByEmail(email);
+
+            var result = _passwordHasher.Verify(password, user.PasswordHash);
+
+            if (result == false)
+            {
+                throw new ArgumentException("Failed to login");
+            }
+
+
+
         }
 
     }
