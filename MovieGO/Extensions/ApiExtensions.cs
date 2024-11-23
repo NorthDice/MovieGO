@@ -24,7 +24,16 @@ namespace MovieGO.Extensions
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Value.SecretKey))
                     };
-                });
+
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            context.Token = context.Request.Cookies["MovieGo"];
+                            return Task.CompletedTask;
+                        }
+                    };
+                }); 
 
             services.AddAuthorization();
 
