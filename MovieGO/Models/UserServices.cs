@@ -1,4 +1,5 @@
 ﻿using MovieGO.Interfaces;
+using MovieGO.Models.Provider;
 using MovieGO.Models.UserData;
 using MovieGO.Repositories;
 
@@ -8,11 +9,13 @@ namespace MovieGO.Models
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly IJwtProvider _jwtProvider; 
 
-        public UserServices(UserRepository usersRepository,IPasswordHasher passwordHasher)
+        public UserServices(UserRepository usersRepository,IPasswordHasher passwordHasher, IJwtProvider jwtProvider)
         {
             _passwordHasher = passwordHasher;
             _userRepository = usersRepository;
+            _jwtProvider = jwtProvider;
         }
 
         public async Task Register(string userName,string email, string password)
@@ -35,7 +38,9 @@ namespace MovieGO.Models
                 throw new ArgumentException("Failed to login");
             }
 
+            var token = _jwtProvider.GenerateJwtToken(user);
 
+            return token;
 
         }
 
