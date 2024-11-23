@@ -20,6 +20,8 @@ namespace MovieGO.Controllers
         {
             var token = await _userService.Login(request.Email, request.Password);
 
+            Response.Cookies.Append("MovieGo",token);
+
             return Results.Ok(token);
 
 
