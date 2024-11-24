@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MovieGO.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MovieGO.Entities;
@@ -25,7 +25,7 @@ namespace MovieGO.Configurations
 
         private RolePermissionEntity[] ParseRolePermissions()
         {
-            return _authorization.RolePermission
+            return _authorization.RolePermissions
                 .SelectMany(rp => rp.Permissions
                 .Select(p => new RolePermissionEntity
                 {
