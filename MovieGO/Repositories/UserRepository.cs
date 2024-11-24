@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MovieGO.Data;
 using MovieGO.Entities;
 using MovieGO.Interfaces;
+using MovieGO.Models.UserData;
 using MovieGO.Models.Users;
 
 namespace MovieGO.Repositories
@@ -20,7 +21,7 @@ namespace MovieGO.Repositories
 
         public async Task Add(User user)
         {
-            var roleEntity = await _context.Roles
+            var roleEntity = await _context.Role
             .SingleOrDefaultAsync(r => r.Id == (int)Role.User)
             ?? throw new InvalidOperationException("User role not found in the database.");
 

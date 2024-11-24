@@ -25,7 +25,7 @@ namespace MovieGO.Configurations
 
         private RolePermissionEntity[] ParseRolePermissions()
         {
-            return _authorization.RolePermissions
+            return _authorization.RolePermission
                 .SelectMany(rp => rp.Permissions
                 .Select(p => new RolePermissionEntity
                 {
