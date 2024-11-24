@@ -18,7 +18,12 @@ namespace MovieGO.Models.Provider
 
         public string GenerateToken(User user)
         {
-            Claim[] claims = [new("userId", user.Id.ToString())];
+            Claim[] claims = 
+            [ 
+                new("userId", user.Id.ToString()),
+                new("Admin", "true")
+                
+            ]; ;
 
             var signingCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey)),
