@@ -12,7 +12,12 @@ namespace MovieGO.Authentication
         {
             var userId = context.User.Claims.FirstOrDefault(
                  c=> c.Type == CustomClaims.UserId
-                );
+            );
+
+            if (userId is null || !Guid.TryParse(userId.Value, out var id))
+            {
+               return Task.CompletedTask;
+            }
         }
     }
 }
