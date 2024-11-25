@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Authorization;
+using MovieGO.Models;
 
 namespace MovieGO.Authentication
 {
@@ -10,7 +11,7 @@ namespace MovieGO.Authentication
             RolePermissionRequirement requirement)
         {
             var userId = context.User.Claims.FirstOrDefault(
-                c=> c.Type == CustomClaims.UserId
+                 c=> c.Type == CustomClaims.UserId
                 );
         }
     }
