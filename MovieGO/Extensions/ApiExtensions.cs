@@ -33,16 +33,10 @@ namespace MovieGO.Extensions
                             return Task.CompletedTask;
                         }
                     };
-                }); 
-
-            
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("AdminPolicy", policy =>
-                {
-                    policy.RequireClaim("Admin", "true");
                 });
-            });
+
+
+            services.AddAuthorization();
 
         }
     }

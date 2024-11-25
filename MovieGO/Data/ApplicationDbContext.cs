@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MovieGO.Configurations;
 using MovieGO.Entities;
+using MovieGO.Repositories;
 
 namespace MovieGO.Data
 {

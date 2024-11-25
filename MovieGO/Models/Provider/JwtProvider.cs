@@ -20,9 +20,7 @@ namespace MovieGO.Models.Provider
         {
             Claim[] claims = 
             [ 
-                new("userId", user.Id.ToString()),
-                new("Admin", "true")
-                
+                new("userId", user.Id.ToString()),  
             ]; ;
 
             var signingCredentials = new SigningCredentials(

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MovieGO.Data;
 using MovieGO.Entities;
+using MovieGO.Enums;
 using MovieGO.Interfaces;
 using MovieGO.Models.UserData;
 using MovieGO.Models.Users;
@@ -21,7 +22,7 @@ namespace MovieGO.Repositories
 
         public async Task Add(User user)
         {
-            var roleEntity = await _context.Role
+            var roleEntity = await _context.Roles
             .SingleOrDefaultAsync(r => r.Id == (int)Role.User)
             ?? throw new InvalidOperationException("User role not found in the database.");
 
@@ -46,6 +47,21 @@ namespace MovieGO.Repositories
                 .FirstOrDefaultAsync(u => u.Email == email) ?? throw new NotImplementedException();
 
             return _mapper.Map<User>(userEntity);
+        }
+        public async Task<HashSet<Permissions>> GetUserPermissions(Guid userId)
+        {
+            var roles = await _context.Users
+                .AsNoTracking()
+                .Include(u => u.Roles)
+                .ThenInclude(r => r.Permissions)
+                .Where(u => u.Id == userId)
+                .ToArrayAsync();
+
+            return roles
+                .SelectMany(r => r.Roles)
+                .SelectMany(r => r.Permissions)
+                .Select(p => (Permissions)p.Id)
+                .ToHashSet();
         }
     }
 }
