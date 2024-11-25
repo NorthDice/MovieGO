@@ -1,4 +1,5 @@
-﻿using MovieGO.Models.UserData;
+﻿using MovieGO.Enums;
+using MovieGO.Models.UserData;
 using MovieGO.Models.Users;
 
 namespace MovieGO.Interfaces
@@ -7,5 +8,6 @@ namespace MovieGO.Interfaces
     {
         Task Add(User user);
         Task<User> GetByEmail(string email);
+        Task<HashSet<Permissions>> GetUserPermissions(Guid userId);
     }
 }

@@ -48,6 +48,7 @@ namespace MovieGO.Repositories
 
             return _mapper.Map<User>(userEntity);
         }
+
         public async Task<HashSet<Permissions>> GetUserPermissions(Guid userId)
         {
             var roles = await _context.Users
