@@ -13,7 +13,7 @@ namespace MovieGO.Services
         }
         public Task<HashSet<Permissions>> GetPermissionsAsync(Guid userId)
         {
-           return _userRepository.GetUserPermission(userId);
+           return _userRepository.GetUserPermissions(userId);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace MovieGO.Models
         private readonly IPasswordHasher _passwordHasher;
         private readonly IJwtProvider _jwtProvider; 
 
-        public UserServices(UserRepository usersRepository,IPasswordHasher passwordHasher, IJwtProvider jwtProvider)
+        public UserServices(IUserRepository usersRepository,IPasswordHasher passwordHasher, IJwtProvider jwtProvider)
         {
             _passwordHasher = passwordHasher;
             _userRepository = usersRepository;
@@ -38,7 +38,7 @@ namespace MovieGO.Models
                 throw new ArgumentException("Failed to login");
             }
 
-            var token = _jwtProvider.GenerateJwtToken(user);
+            var token = _jwtProvider.GenerateToken(user);
 
             return token;
 
