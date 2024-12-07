@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Authorization;
+using MovieGO.Interfaces;
 using MovieGO.Models;
 
 namespace MovieGO.Authentication
@@ -14,7 +15,7 @@ namespace MovieGO.Authentication
             _serviceScopeFactory = serviceScopeFactory;
         }
 
-        protected override Task HandleRequirementAsync(
+        protected override async Task HandleRequirementAsync(
             AuthorizationHandlerContext context, 
             RolePermissionRequirement requirement)
         {
@@ -24,13 +25,20 @@ namespace MovieGO.Authentication
 
             if (userId is null || !Guid.TryParse(userId.Value, out var id))
             {
-               return Task.CompletedTask;
+               return;
             }
 
             using var scope = _serviceScopeFactory.CreateScope();
 
-            var permissionService = scope.ServiceProvider.GetRequiredService
+            var permissionService = scope.ServiceProvider
+                .GetRequiredService<IPermissionService>();
 
+            var permissions = await permissionService.GetPermissionsAsync(id);
+
+            if(permissions.Intersect(requirement.Permissions).Any())
+            {
+                context.Succeed(requirement);
+            }
         }
     }
 }
