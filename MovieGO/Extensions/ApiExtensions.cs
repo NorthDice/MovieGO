@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using MovieGO.Authentication;
 using MovieGO.Enums;
+using MovieGO.Interfaces;
 using MovieGO.Models;
 using MovieGO.Models.Provider;
+using MovieGO.Services;
 using System.Text;
 
 namespace MovieGO.Extensions
@@ -37,6 +41,8 @@ namespace MovieGO.Extensions
                     };
                 });
 
+            services.AddScoped<IPermissionService, PermissionService>();
+            services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
             services.AddAuthorization();
 
