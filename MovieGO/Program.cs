@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.CookiePolicy;
+using Microsoft.EntityFrameworkCore;
+using MovieGO.Data;
 using MovieGO.Models.Provider;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +21,12 @@ if (!app.Environment.IsDevelopment())
 }
 services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
 services.Configure<AuthorizationOptions>(builder.Configuration.GetSection(nameof(AuthorizationOptions)));
+
+
+
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
