@@ -66,6 +66,9 @@ artifacts/
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
 
+# appsetting.json
+MovieGo/appsettings.json
+
 # StyleCop
 StyleCopReport.xml
 
@@ -361,3 +364,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/MovieGO/appsettings.json
