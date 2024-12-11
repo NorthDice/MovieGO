@@ -1,8 +1,13 @@
-﻿namespace MovieGO.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace MovieGO.Entities
 {
     public class UserRoleEntity
     {
-        public int UserId { get; set; }
+        [Key]
+        [Column(TypeName = "uuid")]
+        public Guid UserId { get; set; }
 
         public int RoleId { get; set; }
 
